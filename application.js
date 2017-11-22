@@ -3,6 +3,10 @@
 
     var application = (function() {
         return {
+            // formatCarPlate: function formatCarPlate() {
+
+            // },
+
             getCompanyInfo: function getCompanyInfo() {
                 var ajax = new XMLHttpRequest();
 
@@ -45,6 +49,9 @@
                 carRow.appendChild(carPlate);
                 carRow.appendChild(carColor);
 
+                if (!application.validateCarPlate(carPlate.textContent))
+                    console.log('placa inválida');
+
                 return fragment.appendChild(carRow);
             },
 
@@ -53,7 +60,7 @@
             },
 
             printCompanyInfo: function printCompanyInfo() {
-                if (!app.isRequestReady.call(this))
+                if (!application.isRequestReady.call(this))
                     return;
 
                 var companyData = JSON.parse(this.responseText);
@@ -68,7 +75,15 @@
                 event.preventDefault();
 
                 var carsTable = $('[data-js="cars-table"]').get();
-                carsTable.appendChild(app.insertCar());
+                carsTable.appendChild(application.insertCar());
+            },
+
+            validateCarPlate: function validateCarPlate(carPlate) {
+                return new RegExp('([a-zA-Z]{3})(\d{4})','g');
+            },
+
+            validateFields: function validateFields() {
+                return;
             }
         };
     })();
