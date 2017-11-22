@@ -1,7 +1,7 @@
 (function($) {
     'use strict';
 
-    var app = (function() {
+    var application = (function() {
         return {
             getCompanyInfo: function getCompanyInfo() {
                 var ajax = new XMLHttpRequest();
@@ -73,6 +73,6 @@
         };
     })();
 
-    app.init();
+    application.init();
 
 })(window.DOM);
