@@ -1,2 +1,2 @@
 # curso-javascript-ninja-car-store
-Projeto final do Curso JavaScript Ninja
+Projeto final do Curso JavaScript Ninja.
