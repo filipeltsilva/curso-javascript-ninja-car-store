@@ -1,11 +1,31 @@
 (function(win, doc, $) {
     'use strict';
 
-    var application = (function() {
+    var Application = (function application() {
         return {
-            // formatCarPlate: function formatCarPlate() {
+            // Initializing application
+            initialize: function init() {
+                this.getCompanyInfo();
+                this.initEvents();
+            },
 
-            // },
+            initEvents: function initEvents() {
+                $('[data-js="cars-register"]').on('submit', this.saveCarRegister);
+            },
+
+            // Helpers
+            isRequestReady: function isRequestReady() {
+                return this.readyState === 4 && this.status === 200;
+            },
+
+            // Getting company information
+            getCompanyData: function getCompanyData(name, phone) {
+                var companyName = $('[data-js="company-name"]').get();
+                var companyPhone = $('[data-js="company-phone"]').get();
+
+                companyName.textContent = name;
+                companyPhone.textContent = phone;
+            },
 
             getCompanyInfo: function getCompanyInfo() {
                 var ajax = new XMLHttpRequest();
@@ -15,26 +35,27 @@
                 ajax.addEventListener('readystatechange', this.printCompanyInfo, false);
             },
 
-            initialize: function init() {
-                this.getCompanyInfo();
-                this.initEvents();
+            printCompanyInfo: function printCompanyInfo() {
+                if (!Application.isRequestReady.call(this))
+                    return;
+
+                var companyData = JSON.parse(this.responseText);
+
+                Application.getCompanyData(companyData.name, companyData.phone);
             },
 
-            initEvents: function initEvents() {
-                $('[data-js="cars-register"]').on('submit', this.submitForm);
-            },
-
+            // Adding a new car in the application
             insertCar: function insertCar() {
-                var fragment = document.createDocumentFragment();
+                var fragment = doc.createDocumentFragment();
 
-                var carRow = document.createElement('tr');
-                var carImage = document.createElement('td');
-                var carModel = document.createElement('td');
-                var carYear = document.createElement('td');
-                var carPlate = document.createElement('td');
-                var carColor = document.createElement('td');
+                var carRow = doc.createElement('tr');
+                var carImage = doc.createElement('td');
+                var carModel = doc.createElement('td');
+                var carYear = doc.createElement('td');
+                var carPlate = doc.createElement('td');
+                var carColor = doc.createElement('td');
 
-                var image = document.createElement('img');
+                var image = doc.createElement('img');
                 image.src = $('[data-js="image"]').get().value;
                 carImage.appendChild(image);
 
@@ -49,45 +70,18 @@
                 carRow.appendChild(carPlate);
                 carRow.appendChild(carColor);
 
-                if (!application.validateCarPlate(carPlate.textContent))
-                    console.log('placa inválida');
-
                 return fragment.appendChild(carRow);
             },
 
-            isRequestReady: function isRequestReady() {
-                return this.readyState === 4 && this.status === 200;
-            },
-
-            printCompanyInfo: function printCompanyInfo() {
-                if (!application.isRequestReady.call(this))
-                    return;
-
-                var companyData = JSON.parse(this.responseText);
-                var companyName = $('[data-js="company-name"]').get();
-                var companyPhone = $('[data-js="company-phone"]').get();
-
-                companyName.textContent = companyData.name;
-                companyPhone.textContent = companyData.phone;
-            },
-
-            submitForm: function submitForm(event) {
+            saveCarRegister: function saveCarRegister(event) {
                 event.preventDefault();
 
                 var carsTable = $('[data-js="cars-table"]').get();
-                carsTable.appendChild(application.insertCar());
-            },
-
-            validateCarPlate: function validateCarPlate(carPlate) {
-                return new RegExp('([a-zA-Z]{3})(\d{4})','g');
-            },
-
-            validateFields: function validateFields() {
-                return;
+                carsTable.appendChild(Application.insertCar());
             }
         };
     })();
 
-    application.initialize();
+    Application.initialize();
 
 })(window, document, window.DOM);
