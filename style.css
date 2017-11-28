@@ -1,0 +1,70 @@
+body {
+    font-family: sans-serif;
+}
+
+.cars-list {
+    border: 1px solid #999999;
+    width: 100%;
+}
+
+.cars-list th {
+    font-weight: bold;
+    padding: 15px;
+}
+
+.cars-register {
+    margin-bottom: 50px;
+}
+
+.cars-register button,
+.cars-register input {
+    border-radius: 6px;
+    font-size: 1em;
+    padding: 12px;
+}
+
+.cars-register button {
+    border: 2px solid #187a18;
+    color: #187a18;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.cars-register button:hover {
+    background: #187a18;
+    color: #ffffff;
+}
+
+.cars-register input {
+    border: 2px solid #999999;
+    width: 100%;
+}
+
+.cars-register input::placeholder {
+    color: #999999;
+}
+
+.cars-register li {
+    margin-bottom: 10px;
+}
+
+.cars-register ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.cars-table img {
+    height: auto;
+    max-width: 120px;
+}
+
+.container {
+    padding: 20px;
+    width: 50%;
+}
+
+.header {
+    color: #bd1c44;
+    font-size: 1.25em;
+    text-align: center;
+}
