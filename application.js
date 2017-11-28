@@ -14,6 +14,10 @@
             },
 
             // Helpers
+            getFieldValue: function getFieldValue(inputData) {
+                return $(inputData).get().value;
+            },
+
             isRequestReady: function isRequestReady() {
                 return this.readyState === 4 && this.status === 200;
             },
@@ -45,39 +49,40 @@
             },
 
             // Adding a new car in the application
-            insertCar: function insertCar() {
-                var fragment = doc.createDocumentFragment();
+            createCarDataCell: function createCarDataCell(inputData) {
+                var cell = doc.createElement('td');
 
-                var carRow = doc.createElement('tr');
-                var carImage = doc.createElement('td');
-                var carModel = doc.createElement('td');
-                var carYear = doc.createElement('td');
-                var carPlate = doc.createElement('td');
-                var carColor = doc.createElement('td');
+                cell.textContent = this.getFieldValue(inputData);
+                return cell;
+            },
 
+            createCarImageCell: function createCarImageCell(inputData) {
+                var imageCell = doc.createElement('td');
                 var image = doc.createElement('img');
-                image.src = $('[data-js="image"]').get().value;
-                carImage.appendChild(image);
 
-                carModel.textContent = $('[data-js="mark-model"]').get().value;
-                carYear.textContent = $('[data-js="year"]').get().value;
-                carPlate.textContent = $('[data-js="license-plate"]').get().value;
-                carColor.textContent = $('[data-js="color"]').get().value;
+                image.src = this.getFieldValue(inputData);
+                imageCell.appendChild(image);
+                return imageCell;
+            },
 
-                carRow.appendChild(carImage);
-                carRow.appendChild(carModel);
-                carRow.appendChild(carYear);
-                carRow.appendChild(carPlate);
-                carRow.appendChild(carColor);
+            createCarRegisterRow: function createCarRegisterRow() {
+                var fragment = doc.createDocumentFragment();
+                var row = doc.createElement('tr');
 
-                return fragment.appendChild(carRow);
+                row.appendChild(this.createCarImageCell('[data-js="image"]'));
+                row.appendChild(this.createCarDataCell('[data-js="mark-model"]'));
+                row.appendChild(this.createCarDataCell('[data-js="year"]'))
+                row.appendChild(this.createCarDataCell('[data-js="license-plate"]'))
+                row.appendChild(this.createCarDataCell('[data-js="color"]'))
+
+                return fragment.appendChild(row);
             },
 
             saveCarRegister: function saveCarRegister(event) {
                 event.preventDefault();
 
                 var carsTable = $('[data-js="cars-table"]').get();
-                carsTable.appendChild(Application.insertCar());
+                carsTable.appendChild(Application.createCarRegisterRow());
             }
         };
     })();
