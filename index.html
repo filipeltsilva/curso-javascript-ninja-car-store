@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Curso JavaScript Ninja - Desafio Final</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h2>
+                <span data-js="company-name"></span>
+                <span data-js="company-phone"></span>
+            </h2>
+        </header>
+
+        <form class="cars-register" data-js="cars-register">
+            <ul>
+                <li>
+                    <input type="url" data-js="image" placeholder="Imagem do Carro">
+                </li>
+                <li>
+                    <input type="text" data-js="mark-model" placeholder="Marca/Modelo">
+                </li>
+                <li>
+                    <input type="text" data-js="year" placeholder="Ano">
+                </li>
+                <li>
+                    <input type="text" data-js="license-plate" placeholder="Placa">
+                </li>
+                <li>
+                    <input type="text" data-js="color" placeholder="Cor">
+                </li>
+                <li>
+                    <button class="button button-insert" type="submit">Cadastrar</button>
+                </li>
+            </ul>
+        </form>
+
+        <table class="cars-list">
+            <thead>
+                <tr>
+                    <th>Imagem do Carro</th>
+                    <th>Marca/Modelo</th>
+                    <th>Ano</th>
+                    <th>Placa</th>
+                    <th>Cor</th>
+                </tr>
+            </thead>
+            <tbody class="cars-table" data-js="cars-table">
+
+            </tbody>
+        </table>
+    </div>
+    <script src="lib/dom.js"></script>
+    <script src="application.js"></script>
+</body>
+</html>
