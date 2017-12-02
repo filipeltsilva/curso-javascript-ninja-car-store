@@ -14,6 +14,16 @@
             },
 
             // Helpers
+            clearFields: function clearFields() {
+                var fields = doc.querySelectorAll('input');
+
+                fields.forEach(function(field) {
+                    field.value = '';
+                });
+
+                fields[0].focus();
+            },
+
             getFieldValue: function getFieldValue(inputData) {
                 return $(inputData).get().value;
             },
@@ -88,6 +98,8 @@
 
                 var carsTable = $('[data-js="cars-table"]').get();
                 carsTable.appendChild(Application.createCarRegisterRow());
+
+                Application.clearFields();
             },
 
             // Car delete button
