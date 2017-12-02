@@ -92,9 +92,15 @@
 
             // Car delete button
             createCarDeleteButton: function createCarDeleteButton() {
+                var button = doc.createElement('button');
                 var cell = doc.createElement('td');
 
-                cell.innerHTML = '<button class="button button-delete" data-js="car-register-delete">Excluir</button>';
+                button.addEventListener('click', this.deleteCarRegister);
+                button.className = 'button button-delete';
+                button.innerHTML = 'Excluir';
+                button.setAttribute('data-js', 'car-register-delete');
+
+                cell.appendChild(button);
 
                 return cell;
             },
@@ -102,7 +108,10 @@
             deleteCarRegister: function deleteCarRegister(event) {
                 event.preventDefault();
 
-                alert('teste');
+                var carsTable = $('[data-js="cars-table"]').get();
+
+                if (confirm('Deseja excluir o registro?'))
+                    carsTable.removeChild(this.parentNode.parentNode);
             }
         };
     })();
