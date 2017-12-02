@@ -53,6 +53,7 @@
                 var cell = doc.createElement('td');
 
                 cell.textContent = this.getFieldValue(inputData);
+
                 return cell;
             },
 
@@ -62,6 +63,7 @@
 
                 image.src = this.getFieldValue(inputData);
                 imageCell.appendChild(image);
+
                 return imageCell;
             },
 
@@ -71,9 +73,12 @@
 
                 row.appendChild(this.createCarImageCell('[data-js="image"]'));
                 row.appendChild(this.createCarDataCell('[data-js="mark-model"]'));
-                row.appendChild(this.createCarDataCell('[data-js="year"]'))
-                row.appendChild(this.createCarDataCell('[data-js="license-plate"]'))
-                row.appendChild(this.createCarDataCell('[data-js="color"]'))
+                row.appendChild(this.createCarDataCell('[data-js="year"]'));
+                row.appendChild(this.createCarDataCell('[data-js="license-plate"]'));
+                row.appendChild(this.createCarDataCell('[data-js="color"]'));
+                row.appendChild(this.createCarDeleteButton());
+
+                row.setAttribute('data-js', 'table-row');
 
                 return fragment.appendChild(row);
             },
@@ -83,6 +88,21 @@
 
                 var carsTable = $('[data-js="cars-table"]').get();
                 carsTable.appendChild(Application.createCarRegisterRow());
+            },
+
+            // Car delete button
+            createCarDeleteButton: function createCarDeleteButton() {
+                var cell = doc.createElement('td');
+
+                cell.innerHTML = '<button class="button button-delete" data-js="car-register-delete">Excluir</button>';
+
+                return cell;
+            },
+
+            deleteCarRegister: function deleteCarRegister(event) {
+                event.preventDefault();
+
+                alert('teste');
             }
         };
     })();
